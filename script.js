@@ -99,7 +99,7 @@ function showStep4() {
         alert('Introdu un numar valid de jucatori.');
         return;
     }
-    fetchCSVData('players.csv', parseAndDisplayPlayers);
+    fetchCSVData('/players.csv', parseAndDisplayPlayers);
     document.getElementById('step3').style.display = 'none';
     document.getElementById('step4').style.display = 'block';
 }
@@ -113,7 +113,7 @@ function showStep5() {
 // Fetches CSV data from the server
 function fetchCSVData(url, callback) {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'custom-football-team-balancer' + url, true);
+    xhr.open('GET', url, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             callback(xhr.responseText);
