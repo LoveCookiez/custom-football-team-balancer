@@ -99,7 +99,8 @@ function showStep4() {
         alert('Introdu un numar valid de jucatori.');
         return;
     }
-    fetchCSVData('/players.csv', parseAndDisplayPlayers);
+    // fetchCSVData('/players.csv', parseAndDisplayPlayers);
+    fetchCSVData(parseAndDisplayPlayers);
     document.getElementById('step3').style.display = 'none';
     document.getElementById('step4').style.display = 'block';
 }
@@ -117,6 +118,21 @@ function fetchCSVData(url, callback) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             callback(xhr.responseText);
+        }
+    };
+    xhr.send();
+}
+
+function fetchCSVData(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', './players.csv', true); // "./" refers to the current directory
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                callback(xhr.responseText);
+            } else {
+                console.error("Failed to fetch players.csv, status: " + xhr.status);
+            }
         }
     };
     xhr.send();
