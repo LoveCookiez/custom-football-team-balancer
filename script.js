@@ -113,7 +113,7 @@ function showStep5() {
 // Fetches CSV data from the server
 function fetchCSVData(url, callback) {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
+    xhr.open('GET', 'custom-football-team-balancer' + url, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             callback(xhr.responseText);
