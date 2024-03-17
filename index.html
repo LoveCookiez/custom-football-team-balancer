@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Football Cards</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="step1">
+        <h2>Cati sunteti azi?</h2>
+        <input type="number" id="availablePlayersInput" placeholder="Cati joaca azi tata?">
+        <button onclick="showStep2()">Next</button>
+    </div>
+
+    <div id="step2" style="display: none;">
+        <div id="randomPlayersQuestion">
+            <h3>Avem oameni noi?</h3>
+            <button onclick="showRandomPlayersInput()">Da</button>
+            <button onclick="showStep3()">Nu</button>
+        </div>
+        <div id="randomPlayersInput" style="display:none;">
+            <h2>Cati jucatori sunt adusi de altcineva?</h2>
+            <input type="number" id="randomPlayersCountInput" placeholder="Numarul de jucatori random" min="0">
+            <button onclick="setRandomPlayersCount()">Next</button>
+        </div>
+        <div id="randomPlayersDetails" style="display:none;">
+            <h2>Enter Details for Random Players</h2>
+            <form id="randomPlayersForm">
+                <!-- Dynamic player inputs will be appended here -->
+            </form>
+            <button onclick="collectRandomPlayersDetails()">Continue</button>
+        </div>        
+    </div>
+
+    <div id="step3" style="display:none;">
+        <h2>Cate echipe facem?</h2>
+        <input type="number" id="teamsInput" placeholder="Number of teams">
+        <button onclick="showStep4()">Next</button>
+    </div>
+    
+    <div id="step4" style="display:none;">
+        <h2>Cine joaca azi?</h2>
+        <input type="text" id="searchInput" placeholder="Search players by name..." onkeyup="filterPlayers()">
+        <div id="players"></div>
+        <div id="selectionFooter">
+            <div id="selectedCount">Selectati: 0</div>
+            <button onclick="showStep5()">Vezi echipele</button>
+        </div>
+    </div>
+    <div id="step5" style="display:none;">
+        <h2>Mara & Dona</h2>
+        <div id="teamsResult"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
+

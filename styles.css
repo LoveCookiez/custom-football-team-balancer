@@ -1,0 +1,147 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+h2 {
+    color: #333;
+}
+
+input[type="number"], input[type="text"] {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: calc(100% - 22px);
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#players {
+    padding-bottom: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#selectionFooter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.player-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    width: 200px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.player-card.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+
+.team {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.team h3 {
+    margin-top: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+}
+
+#teamsResult {
+    margin-top: 20px;
+}
+
+
+/* Styles for the random players details form */
+#randomPlayersDetails {
+    margin-top: 20px;
+}
+
+#randomPlayersForm > div {
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#randomPlayersForm label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#randomPlayersForm input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#randomPlayersForm select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#randomPlayersDetails button {
+    margin-top: 20px;
+}
+
+/* Ensure the continue button is visually distinct */
+#collectRandomPlayersDetails {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    #randomPlayersForm input[type="text"], #randomPlayersForm select {
+        width: calc(100% - 20px); /* Adjust for smaller screens */
+    }
+}
