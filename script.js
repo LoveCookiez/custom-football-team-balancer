@@ -124,18 +124,15 @@ function fetchCSVData(url, callback) {
 }
 
 function fetchCSVData(callback) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', './players.csv', true); // "./" refers to the current directory
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                callback(xhr.responseText);
-            } else {
-                console.error("Failed to fetch players.csv, status: " + xhr.status);
+    fetch('players.csv')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-        }
-    };
-    xhr.send();
+            return response.text();
+        })
+        .then(data => callback(data))
+        .catch(error => console.error('There has been a problem with your fetch operation:', error));
 }
 
 function parseAndDisplayPlayers(csvData) {
