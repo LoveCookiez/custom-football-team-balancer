@@ -89,7 +89,7 @@ li {
 
     /* Adjust layout for smaller screens */
     #players {
-        padding-bottom: 100px
+        padding-bottom: 100px;
         flex-direction: column;
         align-items: center;
     }
