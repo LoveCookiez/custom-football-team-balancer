@@ -165,9 +165,19 @@ function addPlayerCard(player) {
     playerCard.innerHTML = `Name: ${player.name}, Rating: ${player.rating}, GK Only: ${player.gkOnly ? 'Yes' : 'No'}`;
     playerCard.innerHTML = player.name
     playerCard.addEventListener('click', function() {
+        const totalSelected = selectedPlayers.length + randomPlayers.length;
+        // Check if adding this player would exceed the total players for today
+        if (player.selected || totalSelected < fixMeTotalPlayersToday) {
             player.selected = !player.selected; // Toggle the selected state
             this.classList.toggle('selected');
             updateSelectedCount();
+        } else {
+            // Alert the user that they cannot select more players
+            alert("Nu poti selecta mai multi jucatori decat numarul total stabilit pentru azi.");
+        }
+            // player.selected = !player.selected; // Toggle the selected state
+            // this.classList.toggle('selected');
+            // updateSelectedCount();
 
     });
     document.getElementById('players').appendChild(playerCard);
