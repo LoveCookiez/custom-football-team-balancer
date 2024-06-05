@@ -13,7 +13,7 @@
 <body>
     <div id="step1">
         <h2>Cati sunteti azi?</h2>
-        <input type="number" id="availablePlayersInput" placeholder="Cati joaca azi tata?">
+        <input required type="number" id="availablePlayersInput" placeholder="Cati joaca azi tata?">
         <button onclick="showStep2()">Next</button>
     </div>
 
@@ -25,7 +25,7 @@
         </div>
         <div id="randomPlayersInput" style="display:none;">
             <h2>Cati jucatori sunt adusi de altcineva?</h2>
-            <input type="number" id="randomPlayersCountInput" placeholder="Numarul de jucatori random" min="0">
+            <input required type="number" id="randomPlayersCountInput" placeholder="Numarul de jucatori random" min="0">
             <button onclick="setRandomPlayersCount()">Next</button>
         </div>
         <div id="randomPlayersDetails" style="display:none;">
@@ -39,14 +39,16 @@
 
     <div id="step3" style="display:none;">
         <h2>Cate echipe facem?</h2>
-        <input type="number" id="teamsInput" placeholder="Number of teams">
+        <input required type="number" id="teamsInput" placeholder="Number of teams">
         <button onclick="showStep4()">Next</button>
     </div>
     
     <div id="step4" style="display:none;">
+      <div class="sticky-header">
         <h2>Cine joaca azi?</h2>
         <input type="text" id="searchInput" placeholder="Search players by name..." onkeyup="filterPlayers()">
-        <div id="players"></div>
+      </div>
+      <div id="players"></div>
         <div id="selectionFooter">
             <div id="selectedCount">Selectati: 0</div>
             <button onclick="showStep5()">Vezi echipele</button>

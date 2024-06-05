@@ -24,6 +24,49 @@ input[type="number"], input[type="text"], select {
     box-sizing: border-box; /* Includes padding and border in element's width */
 }
 
+.sticky-header {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+    background-color: #f8f8f8;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
+}
+
+.sticky-header input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.sticky-header input[type="text"]:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+#search-bar {
+    position: sticky;
+    position: -webkit-sticky; /* For Safari */
+    top: 0;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Slight shadow for depth */
+    justify-content: center;
+}
+
+
+#search-bar focus {
+    border-color: #007BFF; /* Border color on focus */
+    box-shadow: 0 0 5px rgba(0,123,255,0.5); /* Shadow on focus */
+    outline: none; /* Remove default outline */
+}
+
 button {
     width: 100%; /* Full width for better mobile interaction */
     background-color: #007bff;
@@ -40,7 +83,7 @@ button {
 #players, #randomPlayersForm > div {
     display: flex;
     flex-direction: column; /* Stacks form fields vertically */
-    gap: 10px;
+    gap: 2px;
 }
 
 #players {
@@ -49,7 +92,7 @@ button {
 
 .player-card, .team, #randomPlayersForm > div {
     margin-bottom: 15px;
-    padding: 15px;
+    padding: 5px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;

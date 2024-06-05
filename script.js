@@ -70,9 +70,14 @@ function collectRandomPlayersDetails() {
     showStep3();
 }
 
-function showStep2() {
-    document.getElementById('step1').style.display = 'none';
-    document.getElementById('step2').style.display = 'block';
+function showStep2() { 
+    const availablePlayersInput = document.getElementById('availablePlayersInput');
+    if (availablePlayersInput.checkValidity()) {
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
+    } else {
+        availablePlayersInput.reportValidity();
+    }
 }
 
 function showStep3() {
@@ -87,10 +92,14 @@ function showStep4() {
         alert('Introdu un numar valid de jucatori.');
         return;
     }
-
-    fetchCSVData(parseAndDisplayPlayers);
-    document.getElementById('step3').style.display = 'none';
-    document.getElementById('step4').style.display = 'block';
+    const teamsInput = document.getElementById('teamsInput');
+    if (teamsInput.checkValidity()) {
+        fetchCSVData(parseAndDisplayPlayers);
+        document.getElementById('step3').style.display = 'none';
+        document.getElementById('step4').style.display = 'block';
+    } else {
+      teamsInput.reportValidity();
+    }
 }
 
 function showStep5() {
