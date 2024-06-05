@@ -8,6 +8,11 @@ body {
 
 h2 {
     color: #333;
+    text-align: center;
+}
+
+h3 {
+  text-align: center;
 }
 
 input[type="number"], input[type="text"], select {
@@ -98,6 +103,10 @@ li {
         width: 100%; /* Allows cards to expand to full container width */
     }
 
+    h2, h3 {
+      text-align: center;    
+    }
+
     #selectionFooter {
         padding: 15px; /* Increases padding for footer on mobile for easier interaction */
     }
@@ -107,5 +116,9 @@ li {
 @media (max-width: 360px) {
     h2 {
         font-size: 18px; /* Slightly reduce font size for very small screens */
+        text-align: center;
+    }
+    h3 {
+        text-align: center;
     }
 }

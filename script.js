@@ -2,6 +2,7 @@ let allPlayers = [];
 let selectedPlayers = [];
 let randomPlayers = [];
 let fixMeTotalPlayersToday = 0;
+let randomPlayersCount = 0;
 
 function showRandomPlayersInput() {
     document.getElementById('randomPlayersQuestion').style.display = 'none';
@@ -36,12 +37,6 @@ function prepareRandomPlayersDetailsForm(count) {
                         <option value="weak">Slaban</option>
                     </select>
                 </label>
-                <label>Portar?
-                    <select name="playerIsGK${i}">
-                        <option value="False">Nu</option>
-                        <option value="True">Da</option>
-                    </select>
-                </label>
             </div>
         `;
         form.appendChild(playerInput);
@@ -59,7 +54,6 @@ function collectRandomPlayersDetails() {
     for (let i = 0; i < randomPlayersCount; i++) {
         const playerName = form[`playerName${i}`].value;
         const playerSkill = form[`playerSkill${i}`].value;
-        const playerIsGK = form[`playerIsGK${i}`].value;
         
         let rating;
         switch (playerSkill) {
@@ -69,14 +63,8 @@ function collectRandomPlayersDetails() {
             case 'weak': rating = 55; break;
             default: rating = 50; // Default case, should not happen
         }
-        let isGKOnly;
-        switch (playerSkill) {
-            case 'True': isGKOnly = true; break;
-            case 'False': isGKOnly = true; break;
-            default: isGKOnly = false; // Default case, should not happen
-        }
 
-        randomPlayers.push({ name: playerName, rating: rating, gkOnly: isGKOnly });
+        randomPlayers.push({ name: playerName, rating: rating});
     }
 
     showStep3();
@@ -99,7 +87,7 @@ function showStep4() {
         alert('Introdu un numar valid de jucatori.');
         return;
     }
-    // fetchCSVData('/players.csv', parseAndDisplayPlayers);
+
     fetchCSVData(parseAndDisplayPlayers);
     document.getElementById('step3').style.display = 'none';
     document.getElementById('step4').style.display = 'block';
@@ -116,10 +104,11 @@ function fetchCSVData(url, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
+        if (xhr.readyState === 4 && xhr.status === 200 ) {
             callback(xhr.responseText);
         }
     };
+    console.log("caca")
     xhr.send();
 }
 
@@ -142,11 +131,10 @@ function parseAndDisplayPlayers(csvData) {
 
     for (let i = 1; i < lines.length; i++) {
         const data = lines[i].split(',');
-        if (data.length >= 3) {
+        if (data.length >= 2) {
             const player = {
                 name: data[0],
                 rating: parseInt(data[1], 10),
-                gkOnly: data[2].trim() === 'True',
                 selected: false
             };
             allPlayers.push(player);
@@ -162,7 +150,7 @@ function addPlayerCard(player) {
     if (player.selected) {  
         playerCard.classList.add('selected');
     }
-    playerCard.innerHTML = `Name: ${player.name}, Rating: ${player.rating}, GK Only: ${player.gkOnly ? 'Yes' : 'No'}`;
+    playerCard.innerHTML = `Name: ${player.name}, Rating: ${player.rating}`;
     playerCard.innerHTML = player.name
     playerCard.addEventListener('click', function() {
         const totalSelected = selectedPlayers.length + randomPlayers.length;
@@ -200,31 +188,10 @@ function balanceTeams() {
     // Prepare the teams array
     let teams = Array.from({ length: teamsCount }, () => ({ players: [], totalRating: 0 }));
 
-    // Separate GK_Only players and outfield players
-    let gkPlayers = playersToday.filter(player => player.gkOnly);
-    let outfieldPlayers = playersToday.filter(player => !player.gkOnly);
-
-    // Check if the number of GKs matches the number of teams
-    if (gkPlayers.length < teamsCount) {
-        // If not enough GKs, select the lowest-rated outfield players to act as GKs
-        outfieldPlayers.sort((a, b) => a.rating - b.rating); // Sort by rating ascending
-        let neededGKs = teamsCount - gkPlayers.length;
-        let substituteGKs = outfieldPlayers.splice(0, neededGKs);
-
-        // Add substitute GKs to the GKs array
-        gkPlayers = gkPlayers.concat(substituteGKs);
-    }
-
-    // Distribute GKs across teams
-    gkPlayers.forEach((player, index) => {
-        teams[index % teamsCount].players.push(player);
-        teams[index % teamsCount].totalRating += player.rating;
-    });
-
     // Sort outfield players by rating descending for distribution
-    outfieldPlayers.sort((a, b) => b.rating - a.rating);
+    playersToday.sort((a, b) => b.rating - a.rating);
 
-    outfieldPlayers.forEach(player => {
+    playersToday.forEach(player => {
         // Find the team with the lowest total rating
         let team = teams.reduce((prev, current) => (prev.totalRating < current.totalRating) ? prev : current);
         team.players.push(player);
@@ -267,7 +234,6 @@ function displayTeams(teams) {
         const playerList = document.createElement('ul');
         team.players.forEach(player => {
             const playerItem = document.createElement('li');
-            // playerItem.textContent = `${player.name} - Rating: ${player.rating}${player.gkOnly ? ' (GK)' : ''}`;
             playerItem.textContent = `${player.name}`;
             playerList.appendChild(playerItem);
         });
@@ -276,3 +242,4 @@ function displayTeams(teams) {
         teamsContainer.appendChild(teamEl);
     });
 }
+
